@@ -1,5 +1,6 @@
 package com.example.pizzarecipes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,22 +19,38 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewViewHolder> {
 
     ArrayList<PizzaRecipeRecyclerViewItem> arrayList;
+    Context context;
 
-    public static class RecyclerViewViewHolder extends RecyclerView.ViewHolder {
+    public class RecyclerViewViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageView imageView;
         public TextView textView1;
         public TextView textView2;
 
         public RecyclerViewViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             imageView = itemView.findViewById(R.id.imageView);
             textView1 = itemView.findViewById(R.id.textView1);
             textView2 = itemView.findViewById(R.id.textView2);
         }
+
+
+        @Override
+        public void onClick(View view) {
+            Intent detailIntent = new Intent(view.getContext(), DetailActivity.class);
+            int position = getAdapterPosition();
+            PizzaRecipeRecyclerViewItem pizzaRecipeItem = arrayList.get(position);
+
+            detailIntent.putExtra("imageResource", pizzaRecipeItem.getImageResource());
+            detailIntent.putExtra("title", pizzaRecipeItem.getTitle());
+            detailIntent.putExtra("summary", pizzaRecipeItem.getSummary());
+            view.getContext().startActivity(detailIntent);
+        }
     }
 
-    public RecyclerViewAdapter(ArrayList<PizzaRecipeRecyclerViewItem> arrayList) {
+    public RecyclerViewAdapter(ArrayList<PizzaRecipeRecyclerViewItem> arrayList, Context context) {
         this.arrayList = arrayList;
+        this.context = context;
     }
 
     @NonNull
@@ -51,19 +68,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.imageView.setImageResource(recyclerViewItem.getImageResource());
         holder.textView1.setText(recyclerViewItem.getTitle());
         holder.textView2.setText(recyclerViewItem.getSummary());
-
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Intent detailIntent = new Intent(view.getContext(), DetailActivity.class);
-
-                detailIntent.putExtra("imageResource", arrayList.get(position).getImageResource());
-                detailIntent.putExtra("title", arrayList.get(position).getTitle());
-                detailIntent.putExtra("summary", arrayList.get(position).getSummary());
-                view.getContext().startActivity(detailIntent);
-            }
-        });
     }
 
 
