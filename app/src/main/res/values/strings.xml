@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PizzaRecipes</string>
+    <string name="pizza_1_title">Next level Margherita pizza"</string>
+    <string name="pizza_1_summary">Forget takeaways – you can’t beat a homemade Margherita pizza topped with fresh tomato sauce and melted cheese. Here\'s how to master this everyday classic…</string>
+    <string name="pizza_2_title">Pizza Margherita in 4 easy steps</string>
+    <string name="pizza_2_summary">Even a novice cook can master the art of pizza with our simple step-by-step guide. Bellissimo!</string>
+    <string name="pizza_3_title">Caramelised onion &amp; goat\'s cheese pizza</string>
+    <string name="pizza_3_summary">Make a veggie pizza that\'s healthy and low-fat instead of ordering a takeaway. This easy recipe uses goat\'s cheese for tang while the onions give it sweetness</string>
 </resources>
